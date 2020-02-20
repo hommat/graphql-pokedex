@@ -1,9 +1,14 @@
 import React from 'react';
 
-import Layout from '../layout/Layout';
+import Form from '../components/home/Form';
 
 const HomePage = () => {
-  return <Layout>home</Layout>;
+  return (
+    <main>
+      <h1>Find pokemon</h1>
+      <Form />
+    </main>
+  );
 };
 
 export default HomePage;
