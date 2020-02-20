@@ -1,3 +1,7 @@
+export type AllPokemonNamesData = {
+  pokemons: { name: string }[];
+};
+
 export type PokemonData = {
   pokemon: {
     name: string;

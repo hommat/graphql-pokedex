@@ -1,3 +1,9 @@
+export const GET_ALL_POKEMON_NAMES = `{
+  pokemons(first: 151){
+    name
+  }
+}`;
+
 export const GET_POKEMON_DATA = (name: string) => `{
   pokemon(name: "${name}"){
     name,
