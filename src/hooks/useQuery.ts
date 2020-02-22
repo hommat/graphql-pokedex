@@ -1,12 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-function fetchPokemonQuery(query: string) {
-  return fetch('https://graphql-pokemon.now.sh', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query })
-  });
-}
+import { fetchGraphqlPokemonQuery } from '../utils/api';
 
 export default function<T>(query: string) {
   const isMounted = useRef<boolean>(true);
@@ -26,11 +20,10 @@ export default function<T>(query: string) {
     const fetchData = async () => {
       setState(prevState => ({ ...prevState, loading: true }));
 
-      const res = await fetchPokemonQuery(query);
-      const resJSON = (await res.json()) as { data?: T; errors?: string[] };
+      const response = await fetchGraphqlPokemonQuery<T>(query);
 
       if (isMounted.current) {
-        const data = resJSON.data || null;
+        const data = response.data || null;
         setState(prevState => ({ ...prevState, data, loading: false }));
       }
     };
