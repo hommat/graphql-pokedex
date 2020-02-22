@@ -17,9 +17,9 @@ const PokemonTypeList: React.FC<Props> = ({ types }) => {
   return (
     <SPokemonTypeList>
       {types.map(type => (
-        <PokemonType key={type} type={type}>
-          {type}
-        </PokemonType>
+        <li key={type}>
+          <PokemonType type={type}>{type}</PokemonType>
+        </li>
       ))}
     </SPokemonTypeList>
   );

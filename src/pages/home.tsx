@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import Form from '../components/home/Form';
 
 const HomePage = () => {
   return (
-    <main>
+    <Fragment>
       <h1>Find pokemon</h1>
       <Form />
-    </main>
+    </Fragment>
   );
 };
 

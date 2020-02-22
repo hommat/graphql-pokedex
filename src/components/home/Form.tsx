@@ -27,12 +27,15 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <label htmlFor="pokemon">Enter pokemon name</label>
       <input
         disabled={isNull(names)}
         type="text"
         onChange={handleChange}
         value={name}
+        id="pokemon"
       />
+      <button disabled={isNull(names)}>Search</button>
       {error && <p>{error}</p>}
     </form>
   );

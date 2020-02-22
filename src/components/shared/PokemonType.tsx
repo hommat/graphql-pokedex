@@ -21,7 +21,6 @@ const SPokemonType = styled.div<Props>`
 `;
 
 const PokemonType: React.FC<Props> = ({ type, children }) => {
-  console.log('render type');
   return <SPokemonType type={type}>{children}</SPokemonType>;
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Loader from './Loader';
@@ -37,7 +37,7 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
   } = data!.pokemon!;
 
   return (
-    <main>
+    <Fragment>
       <img src={image} alt={name} />
 
       <h2>
@@ -45,7 +45,7 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
       </h2>
 
       <p>Max HP: {maxHP}</p>
-      <p>Max HP: {maxCP}</p>
+      <p>Max CP: {maxCP}</p>
       <p>Flee rate: {fleeRate}</p>
 
       <p>
@@ -59,21 +59,21 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
       <PokemonTypeList types={types} />
 
       {resistant && (
-        <>
+        <Fragment>
           <p>Resistant</p>
           <PokemonTypeList types={resistant} />
-        </>
+        </Fragment>
       )}
 
       {weaknesses && (
-        <>
+        <Fragment>
           <p>Weaknesses</p>
           <PokemonTypeList types={weaknesses} />
-        </>
+        </Fragment>
       )}
 
       {attacks && (
-        <>
+        <Fragment>
           <p>Attacks</p>
           <ol>
             {attacks.fast && (
@@ -101,16 +101,16 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
               </li>
             )}
           </ol>
-        </>
+        </Fragment>
       )}
 
       {evolutions && (
-        <>
+        <Fragment>
           <p>Evolutions</p>
           <ul>
             {evolutions.map(evolution => (
-              <Link key={evolution.name} to={`/pokemon/${evolution.name}`}>
-                <li>
+              <li key={evolution.name}>
+                <Link to={`/pokemon/${evolution.name}`}>
                   <img src={evolution.image} alt={evolution.name} />
                   <p>
                     {evolution.number}. {evolution.name}
@@ -121,13 +121,13 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
                       <li key={type}>{type}</li>
                     ))}
                   </ul>
-                </li>
-              </Link>
+                </Link>
+              </li>
             ))}
           </ul>
-        </>
+        </Fragment>
       )}
-    </main>
+    </Fragment>
   );
 };
 
