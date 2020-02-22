@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Loader from './Loader';
+import PokemonTypeList from '../shared/PokemonTypeList';
 
 import { useQuery } from '../../hooks';
 import { GET_POKEMON_DATA } from '../../graphql/queries';
@@ -55,31 +56,19 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
       </p>
 
       <p>Types</p>
-      <ul>
-        {types.map(type => (
-          <li key={type}>{type}</li>
-        ))}
-      </ul>
+      <PokemonTypeList types={types} />
 
       {resistant && (
         <>
           <p>Resistant</p>
-          <ul>
-            {resistant.map(res => (
-              <li key={res}>{res}</li>
-            ))}
-          </ul>
+          <PokemonTypeList types={resistant} />
         </>
       )}
 
       {weaknesses && (
         <>
           <p>Weaknesses</p>
-          <ul>
-            {weaknesses.map(weakness => (
-              <li key={weakness}>{weakness}</li>
-            ))}
-          </ul>
+          <PokemonTypeList types={weaknesses} />
         </>
       )}
 
