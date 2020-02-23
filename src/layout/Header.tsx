@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { SHeader, SNav, SLink } from './Header.style';
+import { SHeader, STitle } from './Header.style';
 
 const Header = () => {
   return (
     <SHeader>
-      <SNav>
-        <SLink to="/">Home</SLink>
-      </SNav>
+      <STitle to="/">Pokedex</STitle>
     </SHeader>
   );
 };
