@@ -1,6 +1,5 @@
 import React, { ChangeEvent, Fragment, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isNull } from 'util';
 
 import { SInput, SList, SListItem } from './Input.style';
 import { firstLetterUpperAndRestLowerCase } from '../../utils/string';
@@ -89,7 +88,7 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
   return (
     <Fragment>
       <SInput
-        disabled={isNull(names)}
+        disabled={!names}
         type="text"
         onChange={handleChange}
         onKeyDown={handleKeyPress}
