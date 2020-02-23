@@ -18,31 +18,35 @@ type State = {
 enum KeyCode {
   ArrowDown = 40,
   ArrowUp = 38,
-  Enter = 13
+  Enter = 13,
+  Escape = 27
 }
+
+const initState: State = {
+  autoCompleteOpen: false,
+  selectedIndex: -1
+};
 
 const Input: React.FC<Props> = ({ name, onChange }) => {
   const history = useHistory();
   const names = useNames();
-  const [state, setState] = useState<State>({
-    autoCompleteOpen: false,
-    selectedIndex: -1
-  });
+  const [state, setState] = useState<State>(initState);
 
   const { autoCompleteOpen, selectedIndex } = state;
   const formattedName = firstLetterUpperAndRestLowerCase(name);
-  const autoCompleteNames = names
-    ? names.filter(n => n.includes(formattedName))
-    : [];
+  const autoNames = names ? names.filter(n => n.includes(formattedName)) : [];
   const isNameValid = names && names.includes(formattedName);
 
+  const redirectToPokemon = (v: string) => history.push(`/pokemon/${v}`);
+
   const handleBlur = () => setState({ ...state, autoCompleteOpen: false });
+
   const handleFocus = () => {
     setState({ ...state, autoCompleteOpen: true, selectedIndex: -1 });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, selectedIndex: -1 });
+    setState({ ...state, autoCompleteOpen: true, selectedIndex: -1 });
     onChange(e);
   };
 
@@ -56,6 +60,10 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
         e.preventDefault();
         handleArrowUpPress();
         break;
+      case KeyCode.Escape:
+        e.preventDefault();
+        handleEscapePress();
+        break;
       case KeyCode.Enter:
         handleEnterPress();
         break;
@@ -63,26 +71,24 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
   };
 
   const handleArrowDownPress = () => {
-    if (selectedIndex === autoCompleteNames.length - 1) {
+    if (selectedIndex === autoNames.length - 1) {
       setState({ ...state, selectedIndex: 0 });
     } else setState({ ...state, selectedIndex: selectedIndex + 1 });
   };
 
   const handleArrowUpPress = () => {
     if (selectedIndex === -1 || selectedIndex === 0) {
-      setState({ ...state, selectedIndex: autoCompleteNames.length - 1 });
+      setState({ ...state, selectedIndex: autoNames.length - 1 });
     } else setState({ ...state, selectedIndex: selectedIndex - 1 });
   };
 
+  const handleEscapePress = () => setState(initState);
+
   const handleEnterPress = () => {
     if (selectedIndex >= 0) {
-      const selectedName = autoCompleteNames[selectedIndex];
-      history.push(`/pokemon/${selectedName}`);
+      const selectedName = autoNames[selectedIndex];
+      redirectToPokemon(selectedName);
     }
-  };
-
-  const handleOptionMouseDown = (value: string) => {
-    history.push(`/pokemon/${value}`);
   };
 
   return (
@@ -101,11 +107,11 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
       />
       {autoCompleteOpen && name.length > 0 && (
         <SList>
-          {autoCompleteNames.map((value, index) => (
+          {autoNames.map((value, index) => (
             <SListItem
               selected={selectedIndex === index}
               key={value}
-              onMouseDown={() => handleOptionMouseDown(value)}
+              onMouseDown={() => redirectToPokemon(value)}
             >
               {value}
             </SListItem>
