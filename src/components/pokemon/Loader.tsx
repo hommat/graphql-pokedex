@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Loader = () => {
+const PokemonLoader = () => {
   return <h2>Loading...</h2>;
 };
 
-export default Loader;
+export default PokemonLoader;

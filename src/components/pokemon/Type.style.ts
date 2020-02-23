@@ -1,13 +1,11 @@
-import React from 'react';
-
 import styled from '../../styles';
 import { PokemonType as Type } from '../../types';
 
-type Props = {
+type PokemonTypeProps = {
   type: Type;
 };
 
-const SPokemonType = styled.div<Props>`
+export const SPokemonType = styled.div<PokemonTypeProps>`
   padding: 0.4rem 0;
   margin: 0.2rem;
   text-align: center;
@@ -19,9 +17,3 @@ const SPokemonType = styled.div<Props>`
   background: ${props => props.theme.colors.types[props.type].background};
   border: 1px solid ${props => props.theme.colors.types[props.type].border};
 `;
-
-const PokemonType: React.FC<Props> = ({ type, children }) => {
-  return <SPokemonType type={type}>{children}</SPokemonType>;
-};
-
-export default PokemonType;

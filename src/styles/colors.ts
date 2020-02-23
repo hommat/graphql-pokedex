@@ -17,6 +17,10 @@ const colors: Colors = {
   light: 'rgba(255, 255, 255, 0.89)',
   dark: 'rgba(0, 0, 0, 0.89)',
   types: {
+    Dark: {
+      background: '#705848',
+      border: '#49392f'
+    },
     Bug: {
       background: '#a8b820',
       border: '#6d7815'

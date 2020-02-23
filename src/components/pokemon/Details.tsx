@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Loader from './Loader';
-import PokemonTypeList from '../shared/PokemonTypeList';
+import TypeList from './TypeList';
 
 import { useQuery } from '../../hooks';
 import { GET_POKEMON_DATA } from '../../graphql/queries';
@@ -12,7 +12,7 @@ type Props = {
   pokemonName: string;
 };
 
-const Details: React.FC<Props> = ({ pokemonName }) => {
+const PokemonDetails: React.FC<Props> = ({ pokemonName }) => {
   const { data, loading } = useQuery<PokemonData>(
     GET_POKEMON_DATA(pokemonName)
   );
@@ -56,19 +56,19 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
       </p>
 
       <p>Types</p>
-      <PokemonTypeList types={types} />
+      <TypeList types={types} />
 
       {resistant && (
         <Fragment>
           <p>Resistant</p>
-          <PokemonTypeList types={resistant} />
+          <TypeList types={resistant} />
         </Fragment>
       )}
 
       {weaknesses && (
         <Fragment>
           <p>Weaknesses</p>
-          <PokemonTypeList types={weaknesses} />
+          <TypeList types={weaknesses} />
         </Fragment>
       )}
 
@@ -131,4 +131,4 @@ const Details: React.FC<Props> = ({ pokemonName }) => {
   );
 };
 
-export default Details;
+export default PokemonDetails;

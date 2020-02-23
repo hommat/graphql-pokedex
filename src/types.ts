@@ -53,4 +53,5 @@ export type PokemonType =
   | 'Steel'
   | 'Ice'
   | 'Ghost'
-  | 'Dragon';
+  | 'Dragon'
+  | 'Dark';

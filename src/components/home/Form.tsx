@@ -1,14 +1,14 @@
 import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isNull } from 'util';
 
+import Input from './Input';
+import { SForm, SLabel } from './Form.style';
 import { useNames } from '../../hooks';
 import { firstLetterUpperAndRestLowerCase } from '../../utils/string';
 
 const Form = () => {
   const names = useNames();
   const [name, setName] = useState('');
-  const [error, setError] = useState('');
   const history = useHistory();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,22 +22,14 @@ const Form = () => {
     const formattedName = firstLetterUpperAndRestLowerCase(name);
     if (names.includes(formattedName)) {
       history.push(`/pokemon/${formattedName}`);
-    } else setError(`Pokemon ${name} does not exists.`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="pokemon">Enter pokemon name</label>
-      <input
-        disabled={isNull(names)}
-        type="text"
-        onChange={handleChange}
-        value={name}
-        id="pokemon"
-      />
-      <button disabled={isNull(names)}>Search</button>
-      {error && <p>{error}</p>}
-    </form>
+    <SForm onSubmit={handleSubmit}>
+      <SLabel> Enter pokemon names</SLabel>
+      <Input onChange={handleChange} name={name} />
+    </SForm>
   );
 };
 
