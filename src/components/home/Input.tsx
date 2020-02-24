@@ -34,7 +34,10 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
 
   const { autoCompleteOpen, selectedIndex } = state;
   const formattedName = firstLetterUpperAndRestLowerCase(name);
-  const autoNames = names ? names.filter(n => n.includes(formattedName)) : [];
+  const autoNames =
+    names && name.length > 0
+      ? names.filter(n => n.includes(formattedName))
+      : [];
   const isNameValid = names && names.includes(formattedName);
 
   const redirectToPokemon = (v: string) => history.push(`/pokemon/${v}`);
@@ -91,6 +94,8 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
     }
   };
 
+  const listOpen = autoCompleteOpen && autoNames.length > 0 && name.length > 0;
+
   return (
     <Fragment>
       <SInput
@@ -102,10 +107,14 @@ const Input: React.FC<Props> = ({ name, onChange }) => {
         error={!isNameValid}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        listOpen={listOpen}
         id="pokemon"
+        spellCheck="false"
+        autoCorrect="off"
+        autoCapitalize="off"
         autoComplete="off"
       />
-      {autoCompleteOpen && name.length > 0 && (
+      {listOpen && (
         <SList>
           {autoNames.map((value, index) => (
             <SListItem

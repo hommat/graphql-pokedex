@@ -1,6 +1,7 @@
 import { PokemonType } from '../types';
 
 type Colors = {
+  background: string;
   light: string;
   dark: string;
   types: {
@@ -14,6 +15,7 @@ type TypeColor = {
 };
 
 const colors: Colors = {
+  background: '#fafafa',
   light: 'rgba(255, 255, 255, 0.89)',
   dark: 'rgba(0, 0, 0, 0.89)',
   types: {

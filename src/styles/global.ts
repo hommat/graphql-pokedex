@@ -11,7 +11,8 @@ export default createGlobalStyle`
 
   html {
     font-family: 'Roboto', sans-serif;
-    color: ${props => props.theme.colors.dark}
+    color: ${props => props.theme.colors.dark};
+    background: ${props => props.theme.colors.background};
   }
 
   ul {

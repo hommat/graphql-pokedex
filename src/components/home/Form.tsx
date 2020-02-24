@@ -27,7 +27,7 @@ const Form = () => {
 
   return (
     <SForm onSubmit={handleSubmit}>
-      <SLabel> Enter pokemon names</SLabel>
+      <SLabel> Enter pokemon name</SLabel>
       <Input onChange={handleChange} name={name} />
     </SForm>
   );
